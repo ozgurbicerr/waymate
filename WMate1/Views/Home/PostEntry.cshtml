@@ -1,0 +1,74 @@
+﻿@using WMate1.Models
+@model WMate1.ViewModels.EntriesViewModel
+@{
+    ViewBag.Title = "PostEntry";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+<!DOCTYPE html>
+
+<html>
+
+<body id="main">
+    @{
+        UserCredential blogger = null;
+        if (Session["Login"] != null)
+        {
+            blogger = Session["Login"] as UserCredential;
+
+        }
+
+    }
+    <main>
+        <div class="hero-wrap" style="background-image: url(../autoroad/images/hitchiking.jpg);" data-stellar-background-ratio="0.5">
+            @using (Html.BeginForm())
+            {
+
+                <div class="grid-container">
+                    <div class="grid-width-100">
+                        <form action="#" class="request-form ftco-animate">
+                            <h2>Make your trip</h2>
+                            @Html.ValidationSummary(false)
+                            <div class="form-group">
+                                <label for="" class="label">Title</label>
+                                @Html.TextBoxFor(x => x.Entries.Title, new { @class = "input100", placeholder = "Title" })
+                            </div>
+                            <div class="form-group">
+                                <label for="" class="label">Pick-up location</label>
+                                @Html.TextBoxFor(x => x.Entries.PickUpLoc, new { @class = "input100", placeholder = "City, Airport, Station, etc" })
+                            </div>
+                            <div class="form-group">
+                                <label for="" class="label">Drop-off location</label>
+                                @Html.TextBoxFor(x => x.Entries.DropOffLoc, new { @class = "input100", placeholder = "City, Airport, Station, etc" })
+                            </div>
+                            <div class="d-flex">
+                                <div class="form-group mr-2">
+                                    <label for="" class="label">Pick-up date</label>
+                                    <input type="text" class="form-control" id="book_pick_date" placeholder="Date">
+                                </div>
+                                <div class="form-group ml-2">
+                                    <label for="" class="label">Drop-off date</label>
+                                    <input type="text" class="form-control" id="book_off_date" placeholder="Date">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="" class="label">Pick-up time</label>
+                                @Html.TextAreaFor(x => x.Entries.Description, new { @class = "form-control", placeholder = "Enter Your Description about trip." })
+                            </div>
+
+                            <div class="form-group">
+                                <input type="submit" value="Post Your Trip" class="btn btn-primary py-3 px-4">
+                            </div>
+                        </form>
+
+                    </div>
+
+
+                </div>
+            }
+            </div>
+    </main>
+
+</body>
+</html>

@@ -1,0 +1,94 @@
+﻿@using WMate1.Models
+@model UserCredential
+@{
+    ViewBag.Title = Model.UserName;
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title></title>
+
+    <style>
+        #eButtons {
+            list-style: none outside none;
+        }
+
+            #eButtons li {
+                position: relative;
+                display: inline;
+                margin: 20px;
+            }
+    </style>
+</head>
+<body>
+    @{
+        UserCredential user = null;
+        if (Session["Login"] != null)
+        {
+            user = Session["Login"] as UserCredential;
+
+        }
+
+    }
+
+    <!-- END nav -->
+
+    <section class="hero-wrap hero-wrap-2 js-fullheight" style="background-image: url(../autoroad/images/hitchiking.jpg);" data-stellar-background-ratio="0.5">
+        <div class="overlay"></div>
+        <div class="container">
+            <div class="row d-flex">
+                <div class="col-md-6">
+                    <div class="col-md-10 d-flex">
+                        <img src="../../images/@Model.ProfileImage" class="img-circle" width="128" height="128" />
+                    </div>
+                    <div class="col-md-10" style="text-align: center">
+                        <div class="btn-group">
+                            <ul id="eButtons">
+                                <li>
+                                    <a class="btn btn-success" href="/Home/EditProfile/@Model.ID">
+                                        <span class="glypicon glypicon-edit"></span>
+                                        Edit
+                                    </a>
+                                </li>
+                                <li>
+                                    <a class="btn btn-primary" href="/Home/PostEntry">
+                                        <span class="glypicon glypicon-edit"></span>
+                                        Post a trip
+                                    </a>
+                                </li>
+
+                                @*<li>
+                                        <a class="btn btn-danger" href="@Url.Action("RemoveProfile")" onclick="return confirm('Do you really want to delete?');">
+                                            <span class="glypicon glypicon-trash"></span>
+                                            Sil
+                                        </a>
+                                    </li>*@
+                            </ul>
+                        </div>
+
+                    </div>
+                </div>
+
+                <div class="col-md-12 ">
+                    <div class="text px-4 pt-5 pt-md-2 px-md-4 pr-md-5 ftco-animate">
+                        <br />
+                        <h3><b>User Name:@Model.UserName</b></h3>
+                        <h5><b>E-mail:@Model.UserMail</b></h5>
+                        <br />
+                    </div>
+                </div>
+                <br />
+                <br />
+
+            </div>
+        </div>
+    </section>
+
+
+
+
+</body>
+</html>
+

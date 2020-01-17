@@ -1,0 +1,85 @@
+﻿@using System.Web.UI.WebControls
+@using WMate1.ViewModels
+@model RegisterViewModel
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Sign Up </title>
+
+    <!-- Font Icon -->
+    <link rel="stylesheet" href="~/colorlib-regform-10/fonts/material-icon/css/material-design-iconic-font.min.css">
+
+    <!-- Main css -->
+    <link rel="stylesheet" href="~/colorlib-regform-10/css/style.css">
+</head>
+<body>
+
+    <div class="main">
+
+        <h1>Sign up</h1>
+        @using (Html.BeginForm())
+        {
+            <div class="main">
+
+                <section class="signup">
+                    <!-- <img src="images/signup-bg.jpg" alt=""> -->
+                    <div class="container">
+                        <div class="signup-content">
+                            <form method="POST" id="signup-form" class="signup-form">
+                                <h2 class="form-title">Sign Up</h2>
+                                @Html.ValidationSummary(false)
+                                <div class="form-group">
+                                    <div class="form-textbox">
+                                        <label for="name">Full name</label>
+                                        @Html.TextBoxFor(x => x.Username, new { @class = "form-input" })
+                                    </div>
+
+                                </div>
+                                <div class="form-textbox">
+                                    <label for="email">Email</label>
+                                    @Html.TextBoxFor(x => x.Email, new { @class = "form-input" })
+                                </div>
+                                <div class="form-textbox">
+                                    <label for="pass">Password</label>
+                                    @Html.TextBoxFor(x => x.Password, new { @class = "form-input", type = "password" })
+                                   
+                                </div>
+                                <div class="form-textbox">
+                                    <label for="pass">Confirm Password</label>
+                                    @Html.TextBoxFor(x => x.RePassword, new { @class = "form-input", type = "password" })
+                                   
+                                </div>
+                                <div class="form-group">
+                                    <input type="checkbox" name="agree-term" id="agree-term" class="agree-term" />
+                                    <label for="agree-term" class="label-agree-term"><span><span></span></span>I agree all statements in  <a href="#" class="term-service">Terms of service</a></label>
+                                </div>
+
+                                <div class="form-textbox">
+                                    <input type="submit" name="submit" id="submit" class="submit" value="Create account" />
+                                </div>
+                            </form>
+                            <p class="loginhere">
+                                Already have an account ?<a href="/Home/Login" class="loginhere-link"> Log in</a>
+                            </p>
+                            
+                        </div>
+                    </div>
+                </section>
+
+            </div>
+        }
+
+    </div>
+
+    <!-- JS -->
+    <script src="~/colorlib-regform-10/vendor/jquery/jquery.min.js"></script>
+    <script src="~/colorlib-regform-10/js/main.js"></script>
+</body><!-- This templates was made by Colorlib (https://colorlib.com) -->
+</html>

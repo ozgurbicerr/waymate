@@ -1,0 +1,116 @@
+﻿@using WMate1.Models
+@model WMate1.ViewModels.CommentViewModel
+
+@{
+    ViewBag.Title = "Trips";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+<head>
+
+    <link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+    <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
+    <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
+
+
+    <link rel="stylesheet" href="http://fontawesome.io/assets/font-awesome/css/font-awesome.css">
+    <link href="~/css/Comments.css" rel="stylesheet" />
+    <script src="~/js/Comments.js"></script>
+
+</head>
+<html>
+<body>
+    @{
+        UserCredential blogger = null;
+        if (Session["Login"] != null)
+        {
+            blogger = Session["Login"] as UserCredential;
+
+        }
+
+    }
+
+    <div class="col-md-12">
+        <div class="blog-entry ftco-animate d-md-flex">
+            <a href="#" class="img img-2" style="background-image: url(../../images/image_1.jpg);"></a>
+            <div class="text text-2 pl-md-4">
+                <h3 class="mb-2">@Model.Entry.Title</h3>
+
+                @Html.Raw(Model.Entry.Description)
+
+            </div>
+        </div>
+        <!-- Comment Area Start -->
+        <h3>Yorumlar</h3>
+        <div class="comment_area clearfix">
+            <h5 class="title">@Model.CommentsesList.Count() Yorum</h5>
+
+            <ol>
+                @foreach (var item in Model.CommentsesList)
+                {
+                    <!-- Single Comment Area -->
+                    <li class="single_comment_area">
+                        <!-- Comment Content -->
+                        <div class="comment-content d-flex">
+                            <!-- Comment Author -->
+                            <div class="comment-author">
+                                <img width="64" height="64" src="../../images/@item.UserCredential.ProfileImage" class="img-circle" alt="author">
+                            </div>
+                            <!-- Comment Meta -->
+                            <div class="comment-meta">
+                                <a href="#" class="post-author">@item.UserCredential.UserName</a>
+                                <a class="post-date">@item.UploadDate</a>
+                                <p>@Model.CommentsesList.FirstOrDefault(x => x.CommentId == item.CommentId).Description.ToString()</p>
+                            </div>
+                        </div>
+                    </li>
+                }
+            </ol>
+        </div>
+        <!------ Comment System ---------->
+        @using (Html.BeginForm())
+        {
+
+            @Html.HiddenFor(Model => Model.Entry.ID)
+            <div class="container">
+                <div class="row">
+
+                </div>
+
+                <div class="col-12 col-lg-8">
+
+                    <div class="col-md-6">
+                        @Html.ValidationSummary(false)
+                        <div class="post-a-comment-area section-padding-80-0">
+                            @if (blogger != null)
+                            { //this is for hide comment section if user not logged in
+                                <h4>Yorum Yap</h4>
+                                <!-- Reply Form -->
+                                <div class="contact-form-area">
+                                    <form method="POST">
+                                        <div class="row">
+                                            <div class="col-12">
+                                                @Html.TextAreaFor(x => x.Comment.Description, new { @class = "form-control", placeholder = "Yorumunuzu girin..." })
+                                            </div>
+                                            <div class="form-group">
+                                                <input type="submit" name="submit" id="submit" class="form-submit" value="Gönder" />
+                                            </div>
+                                        </div>
+                                    </form>
+                                </div>
+                            }
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+        }
+    </div>
+
+
+</body>
+
+</html>

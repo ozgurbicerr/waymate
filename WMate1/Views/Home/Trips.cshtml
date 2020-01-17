@@ -1,0 +1,41 @@
+﻿@using WMate1.ViewModels;
+@model TripsViewModel
+
+@{
+    ViewBag.Title = "Trips";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+
+<html>
+<body>
+    @foreach (var item in Model.EntryList)
+    {
+        <div class="col-md-12">
+            <div class="blog-entry ftco-animate d-md-flex">
+                <a href="../Home/Entries/@item.ID" class="img img-2" style="background-image: url(../../images/image_1.jpg);"></a>
+                <div class="text text-2 pl-md-4">
+                    <h3 class="mb-2"><a href="../Home/Trips/@item.ID">@item.Title</a></h3>
+                    <div class="meta-wrap">
+                        <p class="meta">
+                            <span><i class="icon-calendar mr-2"></i>@item.CreatedDate</span>
+                            <span><a href="#"><span class="icon-person"> @item.UserCredential.UserName</span></a></span>
+                           <span><i class="icon-comment2 mr-2"></i>@item.Comments.Count Yorum</span>
+                        </p>
+                    </div>
+                    <div>
+                        @Html.Raw(item.Description)
+
+
+                    </div>
+
+                    <p><a href="../Home/Trips/@item.ID" class="btn-custom">Daha Fazla <span class="ion-ios-arrow-forward"></span></a></p>
+                </div>
+            </div>
+        </div>
+    }
+
+</body>
+
+</html>
